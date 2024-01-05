@@ -3,6 +3,11 @@ pipeline{
     tools{
         maven 'Maven 3.9.6'
     }
+    environment {
+            imageName = "venkat7010/springboot-devsecops"
+            dockerImage = ''
+            dockerImageTag = "${imageName}:${BUILD_NUMBER}"
+        }
     stages{
         stage('Checkout App'){
             steps{
@@ -45,6 +50,30 @@ pipeline{
                                     --prettyPrint''', odcInstallation: 'Owasp_Dependency_Check'
 
                     dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                }
+        }
+
+         stage("build and push"){
+            steps {
+                script {
+                    echo "Building docker image..."
+                    dockerImage = docker.build(imageName)
+                    println "Image Created is:${dockerImage}"
+                    echo "Docker Image built succesfully"
+                    }
+                }
+        }
+
+        stage("push to registry"){
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker') {
+                        println "pushing docker image to dockerhub"
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                        println "Docker Image pushed Succesfully"
+                        }
+                    }
                 }
         }
     }
