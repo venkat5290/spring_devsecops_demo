@@ -9,22 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
-public class HelloController
+class HelloController
 {
-
-    private String instance = "DevSecops_Machine";
-    private String name = "Welcome to Automated JENKINS DEPLOYMENT to K8S";
-
     @Autowired
     private HelloService hs;
 
     @GetMapping("/health")
-    public ResponseEntity<String> health(){
-        return hs.getHealth(instance);
+    String health(){
+        return hs.getHealth();
     }
 
     @GetMapping("/")
-    public ResponseEntity<String> hello(){
-        return hs.getHello(name);
+    ResponseEntity<String> hello(){
+        return hs.getHello();
     }
+
 }
