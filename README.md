@@ -9,3 +9,5 @@
 * Jenkinsfile contains stages like git scm,Maven Build, Sonarqube SCA,OWASP Dependency Check,Docker Build, Trivy Scan,Docker push to Dockerhub,Deleting local docker images and finally triggering cd pipeline.
 
 * Image ID is passed as a parameter to Gitops Pipeline
+
+* Gitops pipeline gets triggered and updates the image id in deployment file.
