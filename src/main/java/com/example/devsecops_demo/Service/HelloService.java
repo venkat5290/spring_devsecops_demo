@@ -17,7 +17,7 @@ public class HelloService {
     }
 
     public ResponseEntity<String> getHello() {
-        result = "<html>\n"+"<title>\n"+"Hello App"+"</title>\n"+
+        result = "<html>\n"+"<title>\n"+"Hello App!!"+"</title>\n"+
                 "<body>\n"+"<center>\n"+"<h1>\n"+"Hello!! "+this.name+
                 "</h1>\n"+"</center>\n"+"</body>\n"+"</html>";
 
